@@ -4,6 +4,7 @@ import PressureDepthChart from './PressureDepthChart';
 import TemperatureDepthChart from './TemperatureDepthChart';
 import FluidTypeList from './FluidTypeList';
 import * as data from '../../assets/data';
+import Predict from './Predict'; // Asegúrate de proporcionar la ruta correcta
 
 function calculateDensity(pressure, depth) {
   let g = 9.81; // aceleración debido a la gravedad en m/s²
@@ -13,7 +14,7 @@ function calculateDensity(pressure, depth) {
 }
 
 export default function DataCharts() {
-  const [selectedChart, setSelectedChart] = useState('pressure');
+  const [selectedChart, setSelectedChart] = useState('');
 
   const fluidTypes = data.data.map(item => {
     const density = calculateDensity(item.Pressure, item.Depth);
@@ -33,7 +34,7 @@ export default function DataCharts() {
     label: `P${item.Stop}`,
     depth: item.Depth,
     dataPointText: fluidTypes[index]
-  }))
+  }));
 
   const temperatureData = data.data.map((item, index) => ({
     value: item.Temperature,
@@ -41,7 +42,7 @@ export default function DataCharts() {
     label: `P${item.Stop}`,
     temp: item.Temperature,
     dataPointText: fluidTypes[index]
-  }))
+  }));
 
   return (
     <ScrollView>
@@ -49,6 +50,7 @@ export default function DataCharts() {
         <Button title="Presión" onPress={() => setSelectedChart('pressure')} />
         <Button title="Temperatura" onPress={() => setSelectedChart('temperature')} />
         <Button title="Fluido" onPress={() => setSelectedChart('fluid')} />
+        <Button title="Predict" onPress={() => setSelectedChart('predict')} />
       </View>
       <View style={{ marginTop: 30 }}></View>
       {selectedChart === 'pressure' && (
@@ -64,6 +66,7 @@ export default function DataCharts() {
         </>
       )}
       {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} />}
+      {selectedChart === 'predict' && <Predict />}
     </ScrollView>
   );
 }
