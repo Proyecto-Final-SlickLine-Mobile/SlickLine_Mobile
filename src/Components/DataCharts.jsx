@@ -6,6 +6,19 @@ import FluidTypeList from './FluidTypeList';
 import * as data from '../../assets/data';
 import Predict from './Predict'; // Asegúrate de proporcionar la ruta correcta
 
+const chartData = [
+  {"x": '2024-01', "y": 10000},
+  {"x": '2024-05', "y": 90000},
+  {"x": '2024-09', "y": 150000},
+  {"x": '2025-01', "y": 210000},
+  {"x": '2025-05', "y": 290000},
+  {"x": '2025-09', "y": 350000},
+  {"x": '2026-01', "y": 410000},
+  {"x": '2026-05', "y": 490000},
+  {"x": '2026-09', "y": 550000},
+  {"x": '2027-01', "y": 610000},
+];
+
 function calculateDensity(pressure, depth) {
   let g = 9.81; // aceleración debido a la gravedad en m/s²
   let pressureInPascals = pressure * 6894.76; // convertir la presión de psia a Pascales
@@ -66,7 +79,7 @@ export default function DataCharts() {
         </>
       )}
       {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} />}
-      {selectedChart === 'predict' && <Predict />}
+      {selectedChart === 'predict' && <Predict chartData={chartData} />}
     </ScrollView>
   );
 }

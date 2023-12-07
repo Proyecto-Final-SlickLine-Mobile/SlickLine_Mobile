@@ -3,29 +3,16 @@ import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 
-const data = [
-    {x: '2024-01', y: 10000},
-    {x: '2024-05', y: 90000},
-    {x: '2024-09', y: 150000},
-    {x: '2025-01', y: 210000},
-    {x: '2025-05', y: 290000},
-    {x: '2025-09', y: 350000},
-    {x: '2026-01', y: 410000},
-    {x: '2026-05', y: 490000},
-    {x: '2026-09', y: 550000},
-    {x: '2027-01', y: 610000},
-];
-
-const Predict = ({ data }) => {
+const Predict = ({ chartData }) => {
   // Asegúrate de que 'data' es el array de datos que proporcionaste
   return (
     <ScrollView horizontal={true}>
         <LineChart
             areaChart
             initialSpacing={10}
-            data={data}
+            data={chartData}
             height={280}
-            maxValue={610000} // Actualiza el valor máximo para que coincida con el valor más alto de tus datos
+            maxValue={5800}
             showVerticalLines
             backgroundColor="black"
             startFillColor="rgba(20,105,81,0.3)"
