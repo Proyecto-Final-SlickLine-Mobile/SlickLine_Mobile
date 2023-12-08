@@ -9,17 +9,17 @@ const Predict = ({ chartData }) => {
     <ScrollView horizontal={true}>
         <LineChart
             areaChart
-            initialSpacing={10}
+            initialSpacing={25}
             data={chartData}
             height={280}
-            maxValue={5800}
+            maxValue={620000}
             showVerticalLines
             backgroundColor="black"
             startFillColor="rgba(20,105,81,0.3)"
             endFillColor="rgba(20,85,81,0.01)"
             startOpacity={0.9}
             endOpacity={0.2}
-            spacing={54}
+            spacing={74}
             color1="skyblue"
             textColor1="white"
             hideRules
@@ -55,10 +55,10 @@ const Predict = ({ chartData }) => {
                     paddingLeft: 16,
                     paddingRight: 16
                     }}>
-                    <Text style={{ color: 'lightgray', fontSize: 12 }}>Fecha</Text>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.x}</Text>
-                    <Text style={{ color: 'lightgray', fontSize: 12, marginTop: 12 }}>Valor</Text>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.y}</Text>
+                    <Text style={{ color: 'lightgray', fontSize: 12 }}>Producción estimada:</Text>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.value}</Text>
+                    <Text style={{ color: 'lightgray', fontSize: 12, marginTop: 12 }}>Fecha estimada:</Text>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.label}</Text>
                 </View>
                 );
             },

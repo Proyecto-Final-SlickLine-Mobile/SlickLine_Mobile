@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import PressureDepthChart from './PressureDepthChart';
 import TemperatureDepthChart from './TemperatureDepthChart';
 import FluidTypeList from './FluidTypeList';
 import * as data from '../../assets/data';
-import Predict from './Predict'; // Asegúrate de proporcionar la ruta correcta
+import Predict from './Predict'; 
+import { styles } from '../Styles/Styles'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const chartData = [
   {"x": '2024-01', "y": 10000},
-  {"x": '2024-05', "y": 90000},
+  {"x": '2024-05', "y": 80000},
   {"x": '2024-09', "y": 150000},
   {"x": '2025-01', "y": 210000},
-  {"x": '2025-05', "y": 290000},
+  {"x": '2025-05', "y": 280000},
   {"x": '2025-09', "y": 350000},
-  {"x": '2026-01', "y": 410000},
+  {"x": '2026-01', "y": 420000},
   {"x": '2026-05', "y": 490000},
-  {"x": '2026-09', "y": 550000},
-  {"x": '2027-01', "y": 610000},
+  {"x": '2026-09', "y": 560000},
+  {"x": '2027-01', "y": 630000},
 ];
 
 function calculateDensity(pressure, depth) {
@@ -27,20 +29,30 @@ function calculateDensity(pressure, depth) {
 }
 
 export default function DataCharts() {
-  const [selectedChart, setSelectedChart] = useState('');
+  const [selectedChart, setSelectedChart] = useState('pressure');
 
   const fluidTypes = data.data.map(item => {
     const density = calculateDensity(item.Pressure, item.Depth);
     let fluidType = "Desconocido";
-    if (density >= 800 && density <= 900) {
-      fluidType = "Agua Salada";
-    } else if (density > 900) {
-      fluidType = "Petróleo";
-    } else {
-      fluidType = "Gas";
+    if (density >= 1025) {
+        fluidType = "Agua Salada";
+    } else if (density > 980 && density < 1025) {
+      fluidType = "Mezcla de agua y petroleo"; 
+    } else if (density >= 800 && density <= 980) {
+        fluidType = "Petróleo";
+    } else if (density >= 350 && density < 800) {
+        fluidType = "Mezcla de Petróleo y Gas";
+    } else if (density < 350) {
+        fluidType = "Gas";
     }
     return fluidType;
   });
+
+  const predictData = chartData.map((item, index) => ({
+    value: item.y, 
+    label: item.x,
+    
+  })) 
 
   const pressureData = data.data.map((item, index) => ({
     value: item.Pressure,
@@ -60,12 +72,20 @@ export default function DataCharts() {
   return (
     <ScrollView>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
-        <Button title="Presión" onPress={() => setSelectedChart('pressure')} />
-        <Button title="Temperatura" onPress={() => setSelectedChart('temperature')} />
-        <Button title="Fluido" onPress={() => setSelectedChart('fluid')} />
-        <Button title="Predict" onPress={() => setSelectedChart('predict')} />
-      </View>
-      <View style={{ marginTop: 30 }}></View>
+      <TouchableOpacity style={styles.buttonGraph} onPress={() => setSelectedChart('pressure')}>
+        <Text>   <Icon name="tachometer" size={20} color="#FF9E0A" /> Presión   </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonGraph} onPress={() => setSelectedChart('temperature')}>
+        <Text>   <Icon name="thermometer-half" size={20} color="#FF2020" /> Temperatura   </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonGraph} onPress={() => setSelectedChart('fluid')}>
+        <Text>   <Icon name="tint" size={20} color="#204CFF" /> Fluido   </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonGraph} onPress={() => setSelectedChart('predict')}>
+        <Text>   <Icon name="line-chart" size={20} color="#000" /> Predicción   </Text>
+      </TouchableOpacity>
+    </View>
+      <View style={{ marginTop: 10 }}></View>
       {selectedChart === 'pressure' && (
         <>
           <Text>Gráfico de Presión vs Profundidad</Text>
@@ -79,7 +99,7 @@ export default function DataCharts() {
         </>
       )}
       {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} />}
-      {selectedChart === 'predict' && <Predict chartData={chartData} />}
+      {selectedChart === 'predict' && <Predict chartData={predictData} />}
     </ScrollView>
   );
 }

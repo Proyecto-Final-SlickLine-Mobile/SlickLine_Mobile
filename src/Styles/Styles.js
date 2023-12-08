@@ -41,6 +41,13 @@ export const styles = StyleSheet.create({
     buttonText: {
       textAlign: 'center',
       fontSize: moderateScale(17)
+    },
+    buttonGraph: {
+      borderStyle: 'solid',
+      borderWidth: moderateScale(1),
+      borderRadius: moderateScale(5),
+      borderColor: "#000000",
+      justifyContent: "center"
     }
   });
 
