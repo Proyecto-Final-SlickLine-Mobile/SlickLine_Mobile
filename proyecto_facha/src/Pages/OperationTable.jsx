@@ -37,7 +37,6 @@ function OperationTable({ navigation, route }) {
         text={'Mostrar en gráfico'}
         pressFunction={() => chartRedirection()}
       />
-      <Text>asdasd</Text>
     </>
   );
 }

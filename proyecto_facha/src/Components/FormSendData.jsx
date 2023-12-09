@@ -3,6 +3,7 @@ import { styles } from '../Styles/Styles';
 import { ScrollView, View } from 'react-native';
 import RowsForm from './RowsForm';
 import ButtonTouchable from './ButtonTouchable';
+import * as data from '../../assets/data';
 
 function FormSendData({navigation, route}) {
     const [rows, setRows] = useState([{ parada: 1, presion: '', temperatura: '', profundidad: '', densidad: '' }]);

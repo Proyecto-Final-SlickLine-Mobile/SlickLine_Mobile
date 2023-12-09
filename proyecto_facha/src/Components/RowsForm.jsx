@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Text, TextInput, View } from 'react-native'
 import { styles } from '../Styles/Styles'
+import * as data from '../../assets/data';
 
 function RowsForm({conditional, data, updateRow}) {
 

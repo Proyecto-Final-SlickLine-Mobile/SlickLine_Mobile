@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
-import { AuthContext } from '../Context/AuthContext'; // Asegúrate de importar AuthContext
+import {useAuth } from '../contexts/AuthContext'; // Asegúrate de importar AuthContext
+import { useNavigation } from '@react-navigation/native'
 
 export default function LogIn() {
   const [email, setEmail] = useState('');
@@ -25,6 +26,28 @@ export default function LogIn() {
       role: 'superadmin',
     },
   ];
+
+  const { acces, user, login } = useAuth();
+
+  const navigation = useNavigation();
+
+  const handleLogin = async() => {
+
+        await login(username, password)
+        if ( user ) {
+          // Autenticación exitosa, navega a la pantalla 'Admin'
+          user.role == "admin" && navigation.navigate("Admin")
+        }else if(user ){
+          //Autenticacion Exitosa y es operador
+          user.role == "operador" && navigation.navigate("operador")
+        }else if(user ){
+          //Autenticacion Exitosa y es Super Admin
+          user.role == "superAdmin" && navigation.navigate("superAdmin")
+        } else if (user == null && acces) {
+          // Autenticación fallida, muestra un mensaje de error
+          alert('Nombre de usuario o contraseña incorrectos');
+        }
+  };
   
 
   const signIn = () => {

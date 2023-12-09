@@ -4,7 +4,7 @@ import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: scale(20),
+      
     },
     row: {
       flexDirection: 'row',
@@ -41,6 +41,18 @@ export const styles = StyleSheet.create({
     buttonText: {
       textAlign: 'center',
       fontSize: moderateScale(17)
+    },
+    imageBack: {
+      flex: 1,
+      justifyContent: 'center',
+    },
+    logoContainer: {
+      // Configuración de tamaño fijo para el contenedor de la imagen
+      width: '100%',
+      height: '17%',
+      // Margen inferior para separar la imagen del texto
+      marginBottom: 20,
+      
     },
     buttonGraph: {
       borderStyle: 'solid',
