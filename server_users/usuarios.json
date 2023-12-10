@@ -1,0 +1,42 @@
+[
+  {
+    "username": "usuario0",
+    "password": "usuario0",
+    "email": "usuario0@gmail.com",
+    "role": "operador",
+    "registradoPor": "69ed3412-52f2-4b0b-b6d7-6c199a753d58",
+    "id": "8d1c84ea-3754-4e5a-8e1c-c73456efbcb5"
+  },
+  {
+    "username": "usuario1",
+    "password": "usuario1",
+    "email": "usuario1@gmail.com",
+    "role": "super-admin",
+    "id": "69ed3412-52f2-4b0b-b6d7-6c199a753d58",
+    "registradoPor": "admin"
+  },
+  {
+    "username": "usuario3",
+    "password": "usuario3",
+    "email": "usuario3@gmail.com",
+    "role": "admin",
+    "registradoPor": "69ed3412-52f2-4b0b-b6d7-6c199a753d58",
+    "id": "7d1081b0-011f-4ff7-99df-edffa793df03"
+  },
+  {
+    "username": "usuarioPrueba",
+    "password": "usuarioprueba",
+    "email": "usuarioprueba@gmail.com",
+    "role": "admin",
+    "registradoPor": "69ed3412-52f2-4b0b-b6d7-6c199a753d58",
+    "id": "3daa06fa-195b-40a2-89e0-56fc32027e3c"
+  },
+  {
+    "id": "cb0e0a23-c2f5-4009-a489-0c15916a3bad",
+    "username": "usuario5",
+    "password": "usuario5",
+    "email": "usuario5@gmail.com",
+    "role": "operador",
+    "registradoPor": "69ed3412-52f2-4b0b-b6d7-6c199a753d58"
+  }
+]
