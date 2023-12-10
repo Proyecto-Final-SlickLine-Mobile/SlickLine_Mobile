@@ -3,29 +3,31 @@ import React from "react";
 import { ButtonNavigation } from '../../Components/ButtonNavigation';
 import { useAuth } from '../../contexts/AuthContext';
 import LogoutButton from "../../Components/LogoutButton";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const SuperAdminView = () => {
     const { user } = useAuth();
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.welcomeText}>Hola {user.username}, bienvenido</Text>
+        <View style={SuAd.container}>
+            <Text style={SuAd.welcomeText}>Hola {user.username}, bienvenido</Text>
             
-            <View style={styles.grid}>
-                <ButtonNavigation style={styles.button} titulo={"Registrar usuario"} nav={"Registro de usuarios"}/>
-                <ButtonNavigation style={styles.button} titulo={"Carga de archivos"} nav={"FileUploader"}/>
-                <ButtonNavigation style={styles.button} titulo={"Carga de datos manual"} nav={"Pregunta"}/>
-                <ButtonNavigation style={styles.button} titulo={"Lista de operaciones"} nav={"JobsList"}/>
+                <ButtonNavigation icon={<Icon name="user-plus" size={30} color="#1c5ba7" />} titulo={"Registrar usuario"} nav={"Registro de usuarios"}/>
+                <ButtonNavigation icon={<Icon name="upload" size={30} color="#1c5ba7" />} titulo={"Carga de archivos"} nav={"FileUploader"}/>
+                <ButtonNavigation icon={<Icon name="pencil" size={30} color="#1c5ba7" />} titulo={"Carga de datos manual"} nav={"Pregunta"}/>
+                <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de operaciones"} nav={"JobsList"}/>
+            
+            <View style={{flex: 1 ,justifyContent: 'flex-end'}}>
+                <LogoutButton></LogoutButton>
             </View>
-            <LogoutButton style={styles.logoutButton}></LogoutButton>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+const SuAd = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
         padding: 20,
@@ -33,26 +35,7 @@ const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 20,
         textAlign: 'center',
-        margin: 40,
-    },
-    grid: {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    button: {
-        backgroundColor: '#841584',
-        padding: 80,
-        margin: 10,
-        borderRadius: 5,
-        width: '100%',
-    },
-    logoutButton: {
-        backgroundColor: '#FF0000',
-        padding: 10,
-        margin: 10,
-        borderRadius: 5,
-        alignSelf: 'stretch',
-    },
+        margin: 1,
+        marginBottom: 60
+    }
 });

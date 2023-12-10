@@ -1,8 +1,9 @@
 import React from "react"
-import { View, Text, Button } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { styles } from '../Styles/Styles'
 
-export const ButtonNavigation = ({titulo, nav}) =>{
+export const ButtonNavigation = ({titulo, nav, icon}) =>{
 
     const navigation = useNavigation()
 
@@ -11,8 +12,11 @@ export const ButtonNavigation = ({titulo, nav}) =>{
     }
 
     return(
-        <Button title={titulo} 
-            onPress={navigateTo}
-        />
+        <TouchableOpacity style={styles.buttonInicio} onPress={navigateTo}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                
+                <Text style={{ fontSize: 30 }}>   {icon}    {titulo}  </Text>
+            </View>
+        </TouchableOpacity>
     )
 }

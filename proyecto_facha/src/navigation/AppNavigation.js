@@ -42,6 +42,7 @@ export const AppNavigator =()=>{
           ScreenComponent = (
             <Stack.Navigator>
               <Stack.Screen name="operador" component={OperadorView} />
+              <Stack.Screen name="Table" component={OperationTable} />
               <Stack.Screen name="Pregunta" component={Question} />
               <Stack.Screen name="JobsList" component={JobsList} />
               <Stack.Screen name="ChartsPage" component={ChartsPage} />

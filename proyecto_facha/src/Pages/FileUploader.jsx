@@ -3,6 +3,8 @@ import { View, Text, Button, ScrollView } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 import * as dataFormated from '../../assets/data';
+import { styleList, styles } from '../Styles/Styles'
+import ButtonTouchable from './../Components/ButtonTouchable';
 
 function calculateDensity(pressure, depth) {
   if (depth === 0) {
@@ -77,8 +79,13 @@ export default function FileUploader({ navigation }) {
   };
 
   return (
-    <ScrollView>
-      <Button title="Cargar archivo" onPress={pickDocument} />
-    </ScrollView>
+    <View style={{flex: 1, justifyContent: "center"}}>
+      <ButtonTouchable
+          styleButton={styleList.listEntry}
+          styleText={styles.buttonText}
+          text={"Cargar archivo"}
+          pressFunction={() => pickDocument()}
+      />
+    </View>
   );
 }

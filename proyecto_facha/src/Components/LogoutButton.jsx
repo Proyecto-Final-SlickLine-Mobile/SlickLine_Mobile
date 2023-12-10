@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button,StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function LogoutButton() {
@@ -10,7 +10,9 @@ export default function LogoutButton() {
   };
 
   return (
-    <Button style={styles.logoutButton} title="Cerrar Sesión" onPress={handleLogout} />
+    <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+      <Text style={styles.logoutText}>  Cerrar Sesión  </Text>
+    </TouchableOpacity>
   );
 }
 
@@ -18,10 +20,14 @@ const styles = StyleSheet.create({
   logoutButton: {
     height: 50,
     backgroundColor: '#FF0000',
-    color: '#FF0000',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-},
-})
+    marginBottom: 30
+  },
+  logoutText: {
+    color: '#FFFFFF',
+    fontSize: 25
+  },
+});

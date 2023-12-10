@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
+import { DataTable } from 'react-native-paper';
 import { styles } from '../Styles/Styles';
 import ButtonTouchable from './../Components/ButtonTouchable';
 import * as data from '../../assets/data';
@@ -16,28 +17,34 @@ function OperationTable({ navigation, route }) {
   // (datos.data.data) ? data = datos.data.data : data = datos.data
 
   return (
-    <>
-      <FlatList
-        style={{ flex: 1 }}
-        data={data.data}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => (
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <Text>Parada: {index+1}</Text>
-            <Text>{item.Pressure}</Text>
-            <Text>{item.Temperature}</Text>
-            <Text>{item.Depth}</Text>
-            <Text>{item.Density}</Text>
-          </View>
-        )}
-      />
+    <ScrollView>
       <ButtonTouchable
-        styleButton={styles.button}
-        styleText={styles.buttonText}
-        text={'Mostrar en gráfico'}
-        pressFunction={() => chartRedirection()}
-      />
-    </>
+          styleButton={styles.button}
+          styleText={styles.buttonText}
+          text={'Mostrar en gráfico'}
+          pressFunction={() => chartRedirection()}
+        />
+      <DataTable>
+        <DataTable.Header>
+          <DataTable.Title>Parada</DataTable.Title>
+          <DataTable.Title>Presión</DataTable.Title>
+          <DataTable.Title>Temperatura</DataTable.Title>
+          <DataTable.Title>Profundidad</DataTable.Title>
+          <DataTable.Title>Densidad</DataTable.Title>
+        </DataTable.Header>
+
+        {data.data.map((item, index) => (
+          <DataTable.Row key={index}>
+            <DataTable.Cell>{index+1}</DataTable.Cell>
+            <DataTable.Cell>{item.Pressure}</DataTable.Cell>
+            <DataTable.Cell>{item.Temperature}</DataTable.Cell>
+            <DataTable.Cell>{item.Depth}</DataTable.Cell>
+            <DataTable.Cell>{item.Density}</DataTable.Cell>
+          </DataTable.Row>
+        ))}
+      </DataTable>
+      
+    </ScrollView>
   );
 }
 
