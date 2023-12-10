@@ -60,6 +60,44 @@ Peticiones.getUsuariosPorSuperAdmin = async (registradoPor) => {
   }
 };
 
+Peticiones.eliminarUsuario = async (id) => {
+  try {
+    const response = await fetch(`http://192.168.1.12:3000/usuarios/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log('Respuesta del servidor al eliminar usuario:', data);
+    return data;
+  } catch (error) {
+    console.error('Error al eliminar usuario:', error);
+  }
+};
+
+Peticiones.editarUsuario = async (id, username, password, email, role) => {
+  try {
+    const response = await fetch(`http://192.168.1.12:3000/usuarios/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        email,
+        role,
+      }),
+    });
+    const data = await response.json();
+    console.log('Respuesta del servidor al editar usuario:', data);
+    return data;
+  } catch (error) {
+    console.error('Error al editar usuario:', error);
+  }
+};
+
 
 export default Peticiones;
 

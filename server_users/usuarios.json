@@ -16,14 +16,6 @@
     "registradoPor": "admin"
   },
   {
-    "username": "usuario3",
-    "password": "usuario3",
-    "email": "usuario3@gmail.com",
-    "role": "admin",
-    "registradoPor": "69ed3412-52f2-4b0b-b6d7-6c199a753d58",
-    "id": "7d1081b0-011f-4ff7-99df-edffa793df03"
-  },
-  {
     "username": "usuarioPrueba",
     "password": "usuarioprueba",
     "email": "usuarioprueba@gmail.com",
@@ -33,7 +25,7 @@
   },
   {
     "id": "cb0e0a23-c2f5-4009-a489-0c15916a3bad",
-    "username": "usuario5",
+    "username": "usuario4",
     "password": "usuario5",
     "email": "usuario5@gmail.com",
     "role": "operador",

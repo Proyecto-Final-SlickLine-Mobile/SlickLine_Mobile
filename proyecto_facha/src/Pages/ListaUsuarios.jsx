@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Peticiones from '../Library/Peticiones';
 import { useAuth } from '../contexts/AuthContext';
+import Target from '../Components/Target';
 const ListaUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
 
@@ -23,19 +24,21 @@ const ListaUsuarios = () => {
     obtenerUsuarios();
   }, []);
 
-  const renderUsuario = ({ item }) => (
+  const renderUsuario = ({ item }) => <Target usuario={item} />;
+
+ /* const renderUsuario = ({ item }) => (
     <View>
       <Text>Username: {item.username}</Text>
       <Text>Email: {item.email}</Text>
       <Text>Role: {item.role}</Text>
     </View>
-  );
+  );*/
 
   return (
     <FlatList
       data={usuarios}
       renderItem={renderUsuario}
-      keyExtractor={(item, index) => index.toString()} // Puedes utilizar el ID del usuario si está disponible
+      keyExtractor={(item) => item.id.toString()} // Puedes utilizar el ID del usuario si está disponible
       ListHeaderComponent={<Text>Lista de Usuarios</Text>} // Encabezado de la lista
     />
   );
