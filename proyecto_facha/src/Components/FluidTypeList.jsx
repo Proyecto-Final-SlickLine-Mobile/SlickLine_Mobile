@@ -29,7 +29,7 @@ const FluidTypeList = ({ fluidTypes, data}) => {
 
   return (
     <ScrollView>
-      <Text>Tipos de Fluido por Parada:</Text>
+      <Text style={{fontSize:25}}>Tipos de Fluido por Parada:</Text>
       {fluidTypes.map((fluidType, index) => {
         const { icon, color } = getFluidIconAndColor(fluidType);
         return (

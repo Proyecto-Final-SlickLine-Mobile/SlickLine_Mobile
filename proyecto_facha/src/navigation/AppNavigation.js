@@ -16,6 +16,7 @@ import FileUploader from "../Pages/FileUploader";
 import FormSendData from "../Components/FormSendData";
 import LoginView from "../Pages/views/LoginView";
 import Wells from "../Pages/Wells";
+import ListaUsuarios from "../Pages/ListaUsuarios";
 
 export const AppNavigator =()=>{
     const Stack = createNativeStackNavigator()
@@ -65,6 +66,7 @@ export const AppNavigator =()=>{
               <Stack.Screen name="Carga de Datos" component={FormSendData} />
               <Stack.Screen name="JobsList" component={JobsList} />
               <Stack.Screen name="Wells" component={Wells} />
+              <Stack.Screen name="listaUsuarios" component={ListaUsuarios} />
   
             </Stack.Navigator>
           );

@@ -1,6 +1,9 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
+const { v4: uuidv4 } = require('uuid')
+const { obtenerUsuarioActual } = require('./funciones');
+
 
 const app = express();
 const PORT = 3000;
@@ -33,8 +36,18 @@ fs.stat(path, (err, stats) => {
 });
 
 // Ruta de registro de usuarios
-app.post('/registro', (req, res) => {
-  const { username, password, email, role } = req.body;
+app.post('/registro', async (req, res) => {
+  const { username, password, email, role, registradoPor } = req.body;
+
+  try {
+    const usuarioActual = await obtenerUsuarioActual(registradoPor);
+
+    if (usuarioActual.role !== 'super-admin') {
+      return res.status(401).json({ error: 'No tienes permisos para realizar esta acción' });
+    }
+
+
+  const userId = uuidv4();
 
   // Lee el archivo de usuarios
   fs.readFile(path, 'utf8', (err, data) => {
@@ -52,7 +65,7 @@ app.post('/registro', (req, res) => {
     }
 
     // Agrega el nuevo usuario al array
-    usuarios.push({ username, password, email, role });
+    usuarios.push({ id: userId, username, password, email, role, registradoPor });
 
     // Escribe el array actualizado en el archivo usuarios.json
     fs.writeFile(path, JSON.stringify(usuarios, null, 2), (err) => {
@@ -63,6 +76,10 @@ app.post('/registro', (req, res) => {
       res.status(200).json({ message: 'Usuario registrado correctamente' });
     });
   });
+  } catch (error) {
+    console.error('Error al obtener el usuario:', error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
 });
 
 // Ruta de login de usuarios
@@ -87,6 +104,94 @@ app.post('/login', (req, res) => {
     res.status(200).json({ message: 'Inicio de sesión exitoso', usuario: usuarioValido });
   });
 });
+
+// Ruta para obtener todos los usuarios registrados por un super admin
+app.get('/usuariosPorSuperAdmin/:registradoPor', (req, res) => {
+  const { registradoPor } = req.params;
+
+  // Leer el archivo de usuarios
+  fs.readFile(path, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error al leer el archivo usuarios.json:', err);
+      return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+
+    const usuarios = JSON.parse(data);
+
+    // Filtrar usuarios registrados por el super admin dado
+    const usuariosRegistrados = usuarios.filter(user => user.registradoPor === registradoPor);
+
+    res.status(200).json({ usuariosRegistrados });
+  });
+});
+
+// Ruta para eliminar un usuario por su ID
+app.delete('/usuarios/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Leer el archivo de usuarios
+    const data = fs.readFileSync(path, 'utf8');
+    const usuarios = JSON.parse(data);
+
+    // Buscar el usuario por su ID
+    const usuarioIndex = usuarios.findIndex(user => user.id === id);
+
+    // Si el usuario no existe
+    if (usuarioIndex === -1) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Eliminar el usuario del array
+    usuarios.splice(usuarioIndex, 1);
+
+    // Escribir el array actualizado en el archivo usuarios.json
+    fs.writeFileSync(path, JSON.stringify(usuarios, null, 2));
+
+    res.status(200).json({ message: 'Usuario eliminado correctamente' });
+  } catch (error) {
+    console.error('Error al eliminar usuario:', error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// Ruta para editar un usuario por su ID
+app.put('/usuarios/:id', async (req, res) => {
+  const { id } = req.params;
+  const { username, password, email, role } = req.body;
+
+  try {
+    // Leer el archivo de usuarios
+    const data = fs.readFileSync(path, 'utf8');
+    const usuarios = JSON.parse(data);
+
+    // Buscar el usuario por su ID
+    const usuarioIndex = usuarios.findIndex(user => user.id === id);
+
+    // Si el usuario no existe
+    if (usuarioIndex === -1) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Actualizar los datos del usuario
+    usuarios[usuarioIndex] = {
+      ...usuarios[usuarioIndex],
+      username,
+      password,
+      email,
+      role,
+    };
+
+    // Escribir el array actualizado en el archivo usuarios.json
+    fs.writeFileSync(path, JSON.stringify(usuarios, null, 2));
+
+    res.status(200).json({ message: 'Usuario actualizado correctamente' });
+  } catch (error) {
+    console.error('Error al editar usuario:', error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);

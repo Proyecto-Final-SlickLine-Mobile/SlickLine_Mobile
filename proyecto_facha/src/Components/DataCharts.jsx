@@ -90,18 +90,24 @@ export default function DataCharts({ datos }) {
       <View style={{ marginTop: 10 }}></View>
       {selectedChart === 'pressure' && (
         <>
-          <Text>Gráfico de Presión vs Profundidad</Text>
+          <Text style={{fontSize:20, textAlign: "center"}}>Gráfico de Presión vs Profundidad</Text>
           <PressureDepthChart data={pressureData} />
         </>
       )}
       {selectedChart === 'temperature' && (
         <>
-          <Text>Gráfico de Temperatura vs Profundidad</Text>
+          <Text style={{fontSize:20, textAlign: "center"}}>Gráfico de Temperatura vs Profundidad</Text>
           <TemperatureDepthChart data={temperatureData} />
         </>
       )}
       {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} data={data} />}
-      {selectedChart === 'predict' && <Predict chartData={predictData} />}
+      {selectedChart === 'predict' && (
+        <>
+          <Text style={{fontSize: 18, textAlign: "center"}}>Predicción de Producción de Petróleo en barriles en 3 años</Text>
+          <Predict chartData={predictData} />
+        </>
+      )}
+
     </ScrollView>
   );
 }

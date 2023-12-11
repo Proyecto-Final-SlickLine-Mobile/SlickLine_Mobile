@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Peticiones from '../../Library/Peticiones';
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function RegistroView() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [rol, setRol] = useState('operador'); // Valor predeterminado
+  const [serverResponse, setServerResponse] = useState('');
+  const navigation = useNavigation();
+
+  const {user} = useAuth();
 
   const handleRegistro = async () => {
     // Lógica para enviar los datos al servidor
     try {
-      const response = await Peticiones.register(username, password, email, rol);
+      const response = await Peticiones.register(username, password, email, rol, user.id);
       // Manejar la respuesta del servidor
       console.log('Respuesta del servidor:', response);
+      setServerResponse('Usuario registrado correctamente');
+      setTimeout(() => {
+        setServerResponse('');
+        navigation.navigate('listaUsuarios'); // Cambia 'ListaUsuarios' por el nombre correcto de tu página de lista de usuarios
+      }, 5000); // Espera 5 segundos antes de redirigir
     } catch (error) {
       console.error('Error al registrar:', error);
+      setServerResponse('Error al registrar');
     }
   };
 
@@ -57,6 +70,8 @@ export default function RegistroView() {
       <TouchableOpacity style={styles.registerButton} onPress={handleRegistro}>
         <Text style={styles.registerButtonText}>Registrar</Text>
       </TouchableOpacity>
+
+      {serverResponse ? <Text style={styles.serverResponse}>{serverResponse}</Text> : null}
     </View>
   );
 }
