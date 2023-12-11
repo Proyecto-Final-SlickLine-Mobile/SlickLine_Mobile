@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
-import * as dataFormated from '../../assets/data';
+import * as dataFormated from '../../assets/data.js';
 import { styleList, styles } from '../Styles/Styles'
 import ButtonTouchable from './../Components/ButtonTouchable';
 
@@ -16,12 +16,10 @@ function calculateDensity(pressure, depth) {
   return density;
 }
 
-console.log(dataFormated)
-
 export default function FileUploader({ navigation }) {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  const processFile = async (fileContent) => {
+  const processFile = async () => {
     // console.log(fileContent)
     // const lines = fileContent.split('\n');
 
@@ -59,7 +57,7 @@ export default function FileUploader({ navigation }) {
     //   };
     // }).filter(item => item !== null && !isNaN(item.Pressure));
 
-    navigation.navigate('Table')
+    navigation.navigate('ChartsPage', { data: dataFormated.data })
   }
 
   const pickDocument = async () => {

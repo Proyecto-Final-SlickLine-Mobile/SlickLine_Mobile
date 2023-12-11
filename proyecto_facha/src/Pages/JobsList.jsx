@@ -1,25 +1,50 @@
-import React from 'react'
-import { ScrollView, View } from 'react-native'
-import { styleList, styles } from '../Styles/Styles'
+import React from 'react';
+import { ScrollView, View, Text } from 'react-native';
+import { styleList, styles } from '../Styles/Styles';
 import ButtonTouchable from './../Components/ButtonTouchable';
-import { data } from '../../assets/data';
+import { useNavigation } from '@react-navigation/native';
+import { useRef } from 'react';
 
-function JobsList({navigation}) {
+function JobsList({ route }) {
+  const { operations } = route.params;
+  const navigation = useNavigation();
 
-    const tableRedirection = (data) => {
-        navigation.navigate('Table', { data: data})
-    }
+  const scrollViewRef = useRef();
+
+  const tableRedirection = (operation) => {
+    navigation.navigate('Table', { operation });
+  };
+
+  const questionRedirection = () => {
+    navigation.navigate('Pregunta');
+  };
 
   return (
-    <View style={styles.container}>
-        <ButtonTouchable
-            styleButton={styleList.listEntry}
+    <ScrollView style={styles.container} ref={scrollViewRef}>
+      <View>
+        {operations.map((operation) => (
+          <ButtonTouchable
+            key={operation.name}
+            styleButton={styles.sendButton}
             styleText={styles.buttonText}
-            text={'Operación n°17058 - 14/03/2023'}
-            pressFunction={() => tableRedirection(data)}
-        />
-    </View>
-  )
+            text={`Operation: ${operation.name}`}
+            pressFunction={() => tableRedirection(operation)}
+          />
+        ))}
+      </View>
+      {operations.length === 0 ? (
+        <View>
+          <Text style={{fontSize: 20, textAlign: 'center'}}>Aún no hay datos en este pozo</Text>
+        </View>
+      ) : null}
+      <ButtonTouchable
+            styleButton={styles.sendButton}
+            styleText={styles.buttonText}
+            text={'Cargar datos'}
+            pressFunction={questionRedirection}
+          />
+    </ScrollView>
+  );
 }
 
-export default JobsList
+export default JobsList;

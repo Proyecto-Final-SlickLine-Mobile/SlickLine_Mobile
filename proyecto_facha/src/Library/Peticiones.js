@@ -3,7 +3,7 @@ const Peticiones = {};
 
 Peticiones.register = async (username, password, email, role) => {
   try {
-    const response = await fetch('http://192.168.0.104:3000/registro', {
+    const response = await fetch('http://192.168.56.1:3000/registro', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ Peticiones.register = async (username, password, email, role) => {
 
 Peticiones.login = async (username, password) => {
   try {
-    const response = await fetch('http://192.168.0.104:3000/login', {
+    const response = await fetch('http://192.168.56.1:3000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
       borderWidth :moderateScale(1),
       borderRadius :moderateScale(5),
       borderColor :"#000000",
-      backgroundColor :"#1c5ba7",
+      backgroundColor :"#007bff",
       width :'50%',
       alignSelf: 'center',
       marginTop :moderateScale(15)

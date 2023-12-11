@@ -15,8 +15,7 @@ export const SuperAdminView = () => {
                 <ButtonNavigation icon={<Icon name="user-plus" size={30} color="#1c5ba7" />} titulo={"Registrar usuario"} nav={"Registro de usuarios"}/>
                 <ButtonNavigation icon={<Icon name="upload" size={30} color="#1c5ba7" />} titulo={"Carga de archivos"} nav={"FileUploader"}/>
                 <ButtonNavigation icon={<Icon name="pencil" size={30} color="#1c5ba7" />} titulo={"Carga de datos manual"} nav={"Pregunta"}/>
-                <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de operaciones"} nav={"JobsList"}/>
-            
+                <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de pozos"} nav={"Wells"}/>
             <View style={{flex: 1 ,justifyContent: 'flex-end'}}>
                 <LogoutButton></LogoutButton>
             </View>

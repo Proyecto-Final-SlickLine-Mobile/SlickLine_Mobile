@@ -12,8 +12,8 @@ export default function AdminView() {
     <View style={SuAd.container}>
       <Text style={SuAd.welcomeText}>Hola {user.username}, bienvenido</Text>
       <ButtonNavigation icon={<Icon name="upload" size={30} color="#1c5ba7" />} titulo={"carga de archivos"} nav={"FileUploader"}/>
-      <ButtonNavigation icon={<Icon name="pencil" size={30} color="#1c5ba7" />} titulo={"carga de datos manual"} nav={"Carga de Datos"}/>
-      <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de operaciones"} nav={"JobsList"}/>
+      <ButtonNavigation icon={<Icon name="pencil" size={30} color="#1c5ba7" />} titulo={"carga de datos manual"} nav={"Pregunta"}/>
+      <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de pozos"} nav={"Wells"}/>
       
       <View style={{flex: 1 ,justifyContent: 'flex-end'}}>
         <LogoutButton></LogoutButton>

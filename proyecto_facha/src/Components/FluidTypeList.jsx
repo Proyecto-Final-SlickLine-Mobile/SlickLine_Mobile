@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Card, Title } from 'react-native-paper';
-import * as data from '../../assets/data';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const getFluidIconAndColor = (fluidType) => {
@@ -21,11 +20,11 @@ const getFluidIconAndColor = (fluidType) => {
   }
 };
 
-const FluidTypeList = ({ fluidTypes }) => {
-  const dataFluid = data.data.map((item, index) => ({
-    press: item.Pressure,
-    temp: item.Temperature,
-    depth: item.Depth
+const FluidTypeList = ({ fluidTypes, data}) => {
+  const dataFluid = data.map((item, index) => ({
+    press: item.pressure,
+    temp: item.temperature,
+    depth: item.depth
   }));
 
   return (

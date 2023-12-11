@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import PressureDepthChart from './PressureDepthChart';
 import TemperatureDepthChart from './TemperatureDepthChart';
 import FluidTypeList from './FluidTypeList';
-import * as data from '../../assets/data';
+import * as dataFormated from '../../assets/data.js';
 import Predict from './Predict'; 
 import { styles } from '../Styles/Styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -28,11 +28,13 @@ function calculateDensity(pressure, depth) {
   return density;
 }
 
-export default function DataCharts() {
+export default function DataCharts({ datos }) {
   const [selectedChart, setSelectedChart] = useState('pressure');
 
-  const fluidTypes = data.data.map(item => {
-    const density = calculateDensity(item.Pressure, item.Depth);
+  const data = datos
+
+  const fluidTypes = data.map(item => {
+    const density = calculateDensity(item.pressure, item.depth);
     let fluidType = "Desconocido";
     if (density >= 1025) {
         fluidType = "Agua Salada";
@@ -54,18 +56,18 @@ export default function DataCharts() {
     
   })) 
 
-  const pressureData = data.data.map((item, index) => ({
-    value: item.Pressure,
-    label: `P${item.Stop}`,
-    depth: item.Depth,
+  const pressureData = data.map((item, index) => ({
+    value: item.pressure,
+    label: `P${item.stop}`,
+    depth: item.depth,
     dataPointText: fluidTypes[index]
   }));
 
-  const temperatureData = data.data.map((item, index) => ({
-    value: item.Temperature,
-    depth: item.Depth,
-    label: `P${item.Stop}`,
-    temp: item.Temperature,
+  const temperatureData = data.map((item, index) => ({
+    value: item.temperature,
+    depth: item.depth,
+    label: `P${item.stop}`,
+    temp: item.temperature,
     dataPointText: fluidTypes[index]
   }));
 
@@ -98,7 +100,7 @@ export default function DataCharts() {
           <TemperatureDepthChart data={temperatureData} />
         </>
       )}
-      {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} />}
+      {selectedChart === 'fluid' && <FluidTypeList fluidTypes={fluidTypes} data={data} />}
       {selectedChart === 'predict' && <Predict chartData={predictData} />}
     </ScrollView>
   );

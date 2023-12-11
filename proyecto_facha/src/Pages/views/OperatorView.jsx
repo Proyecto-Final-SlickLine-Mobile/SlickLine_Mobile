@@ -11,8 +11,7 @@ export default function OperadorView() {
   return (
     <View style={SuAd.container}>
       <Text style={SuAd.welcomeText}>Hola Operador {user.username}, bienvenido</Text>
-      <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de operaciones"} nav={"JobsList"}/>
-      
+      <ButtonNavigation icon={<Icon name="list" size={30} color="#1c5ba7" />} titulo={"Lista de pozos"} nav={"Wells"}/>
       <View style={{flex: 1 ,justifyContent: 'flex-end'}}>
         <LogoutButton></LogoutButton>
       </View>

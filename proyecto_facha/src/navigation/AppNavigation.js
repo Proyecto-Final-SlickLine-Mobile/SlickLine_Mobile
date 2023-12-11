@@ -15,6 +15,7 @@ import RegistroView from "../Pages/views/RegistroView";
 import FileUploader from "../Pages/FileUploader";
 import FormSendData from "../Components/FormSendData";
 import LoginView from "../Pages/views/LoginView";
+import Wells from "../Pages/Wells";
 
 export const AppNavigator =()=>{
     const Stack = createNativeStackNavigator()
@@ -35,6 +36,7 @@ export const AppNavigator =()=>{
               <Stack.Screen name="FileUploader" component={FileUploader} />
               <Stack.Screen name="Carga de Datos" component={FormSendData} />
               <Stack.Screen name="JobsList" component={JobsList} />
+              <Stack.Screen name="Wells" component={Wells} />
             </Stack.Navigator>
           );
           break;
@@ -46,6 +48,7 @@ export const AppNavigator =()=>{
               <Stack.Screen name="Pregunta" component={Question} />
               <Stack.Screen name="JobsList" component={JobsList} />
               <Stack.Screen name="ChartsPage" component={ChartsPage} />
+              <Stack.Screen name="Wells" component={Wells} />
               
             </Stack.Navigator>
           );
@@ -61,6 +64,7 @@ export const AppNavigator =()=>{
               <Stack.Screen name="FileUploader" component={FileUploader} />
               <Stack.Screen name="Carga de Datos" component={FormSendData} />
               <Stack.Screen name="JobsList" component={JobsList} />
+              <Stack.Screen name="Wells" component={Wells} />
   
             </Stack.Navigator>
           );

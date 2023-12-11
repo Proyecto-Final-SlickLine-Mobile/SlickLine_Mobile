@@ -6,12 +6,12 @@ import { Text } from 'react-native';
 import ChartsData from '../Components/ChartsData';
 
 function ChartsPage({ route }) {
-  // const { data } = route.params;
+  const { data } = route.params;
 
   return (
     <View>
       {/* <ChartsData data={data} /> */}
-      <DataCharts />
+      <DataCharts datos={data}/>
     </View>
   );
 }
